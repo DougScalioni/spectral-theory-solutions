@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+
+
+\theoremstyle{remark}
+\newtheorem{innerex}{Exercise}
+\newenvironment{exercise}[1]
+  {\renewcommand\theinnerex{#1}\innerex}
+  {\endinnerex}
+
+\DeclareMathOperator{\domain}{dom } \newcommand{\dom}{\domain}
+
+\DeclareMathOperator{\range}{rng } \newcommand{\rng}{\range}
+
+\DeclareMathOperator{\nullspace}{N} \newcommand{\kernel}{\nullspace}
+
+\renewcommand{\labelenumi}{\alph{enumi})}
+
+
+\begin{document}
+
+
+\title{Intermediate Spectral Theory and Quantum Dynamics \\ César R. de Oliveira \\ Notes and Solutions}
+\author{Douglas Scalioni Domingues}
+\date{April 2021}
+
+\maketitle
+
+\section{Linear Operators and Spectra}
+
+\subsection{Bounded Operators}
+
+\begin{exercise}{1.1.5}
+    Let $T : \dom{T} \subset X \rightarrow Y$ be a linear operator. Verify the following
+    items:
+
+    \begin{enumerate}
+        \item The range of T , $\rng T := T (\dom T) \subset Y$ , and the kernel (or null space) of T,
+              $\kernel(T) := \{\xi \in \dom T : T \xi = 0\}$, are vector spaces.
+              
+
+              \underline{rng}: Let $X$, $Y$ be in the range of $T$ and $\alpha \in \mathbb{F}$. There
+              exist $x$ and $y$ in $\dom T$ such that $Tx=X$ and $Ty = Y$. Since $\dom T$ is a vector
+              subspace, $\alpha x + y$ is also in $\dom T$, and therefore $T(\alpha x + y)$ exists. $T$
+              is linear, then $T(\alpha x + y) = \alpha T(x) + T(y)$.
+              
+
+              \underline{kernel}:
+              Let $x, y \in \textrm{ker}(T)$ and $\alpha \in \mathbb{F}$. Then $T(\alpha x+y) = \alpha T(x) + T(y) = 0 + 0 = 0$,
+              and $\alpha x + y \in \textrm{ker}(T)$.
+              
+
+        \item If the dimension $\dim(\dom T) = n < \infty$, then $\dim(\rng T ) \leq n$.
+              
+
+              The dimension of a vector space is given by the number of elements in its basis. Suppose $B = \{ b_1, ..., b_n\}$
+              is a basis of dom $T$ with $n$ elements. Given an arbitrary element x of $\dom T$, we have $x = a_1 b_1 + ... + a_n b_n$.
+              The range of $T$ is completely determined by its action on the basis of $\dom T$:
+              \begin{math}
+                  T(x) = T(a_1 b_1 + ... + a_n b_n) = a_1 T(b_1) + ... + a_n T(b_n)
+              \end{math}
+              Clearly, the set $\{T(b_1) + ... + T(b_n)\}$ spans rng $T$, and therefore  $\dim(\rng T) \leq n$.
+              
+
+        \item The inverse operator of $T$, $T^{-1}: \rng T$ $\rightarrow \dom T$, exists if, and only if, $T\xi = 0 \Rightarrow \xi = 0$
+              and, in case it exists, it is also a linear operator.
+              
+
+              For $T$ to have an inverse it needs to be a bijection, just like any other function. In particular, $T$ has to be injective.
+              $T(a) = T(b)$ implies that $a=b$. But $T(a) = T(b) \Rightarrow T(a) - T(b) = T(a-b) = 0$
+
+    \end{enumerate}
+
+\end{exercise}
+
+
+
+\end{document}
