@@ -18,6 +18,9 @@
 
 \DeclareMathOperator{\nullspace}{N} \newcommand{\kernel}{\nullspace}
 
+\DeclareMathOperator{\bounded}{B}
+
+
 \renewcommand{\labelenumi}{\alph{enumi})}
 
 
@@ -25,7 +28,7 @@
 
 
 \title{Intermediate Spectral Theory and Quantum Dynamics \\ César R. de Oliveira \\ Notes and Solutions}
-\author{Douglas Scalioni Domingues} 
+\author{Douglas Scalioni Domingues}
 \date{April 2021}
 
 \maketitle
@@ -39,23 +42,23 @@
     items:
 
     \begin{enumerate}
-        \item The range of T , $\rng T := T (\dom T) \subset Y$ , and the kernel (or null space) of T,
+        \item The range of T , $\rng T := T (\dom T) \subset Y$, and the kernel (or null space) of T,
               $\kernel(T) := \{\xi \in \dom T : T \xi = 0\}$, are vector spaces.
-              
+
 
               \underline{rng}: Let $X$, $Y$ be in the range of $T$ and $\alpha \in \mathbb{F}$. There
               exist $x$ and $y$ in $\dom T$ such that $Tx=X$ and $Ty = Y$. Since $\dom T$ is a vector
               subspace, $\alpha x + y$ is also in $\dom T$, and therefore $T(\alpha x + y)$ exists. $T$
               is linear, then $T(\alpha x + y) = \alpha T(x) + T(y)$.
-              
+
 
               \underline{kernel}:
-              Let $x, y \in \textrm{ker}(T)$ and $\alpha \in \mathbb{F}$. Then $T(\alpha x+y) = \alpha T(x) + T(y) = 0 + 0 = 0$,
+              Let $x, y \in \textrm{ker}(T)$ and $\alpha \in \mathbb{F}$. Then $T(\alpha x+y) = \alpha T(x) + T(y) = \alpha 0 + 0 = 0$,
               and $\alpha x + y \in \textrm{ker}(T)$.
-              
+
 
         \item If the dimension $\dim(\dom T) = n < \infty$, then $\dim(\rng T ) \leq n$.
-              
+
 
               The dimension of a vector space is given by the number of elements in its basis. Suppose $B = \{ b_1, ..., b_n\}$
               is a basis of dom $T$ with $n$ elements. Given an arbitrary element x of $\dom T$, we have $x = a_1 b_1 + ... + a_n b_n$.
@@ -63,20 +66,139 @@
               \begin{math}
                   T(x) = T(a_1 b_1 + ... + a_n b_n) = a_1 T(b_1) + ... + a_n T(b_n)
               \end{math}
-              Clearly, the set $\{T(b_1) + ... + T(b_n)\}$ spans rng $T$, and therefore  $\dim(\rng T) \leq n$.
-              
+              Clearly, the set $\{T(b_1), ... , T(b_n)\}$ has $n$ elements and spans rng $T$, and therefore  $\dim(\rng T) \leq n$.
+
 
         \item The inverse operator of $T$, $T^{-1}: \rng T$ $\rightarrow \dom T$, exists if, and only if, $T\xi = 0 \Rightarrow \xi = 0$
               and, in case it exists, it is also a linear operator.
-              
 
-              For $T$ to have an inverse it needs to be a bijection, just like any other function. In particular, $T$ has to be injective.
-              $T(a) = T(b)$ implies that $a=b$. But $T(a) = T(b) \Rightarrow T(a) - T(b) = T(a-b) = 0$
+
+              For $T$ to have an inverse it needs to be a bijection. In particular, $T$ has to be injective (which means that $T(x) = T(y)$ implies that $x=y$ $\forall x, y$).
+              Let $a,b \in \dom T$ such that $T(a) = T(b) \Rightarrow T(a) - T(b) = T(a-b) = 0$. Clearly, $T$
+              is injective \textit{iff} $a-b = 0$.
+
+              $T$ is guaranteed to be surjective since it's defined onto its range. Calling $a-b = \xi$, we have
+              $$ T \text{ is invertible} \Leftrightarrow T \text{ is bijective} \Leftrightarrow (T\xi = 0 \Rightarrow \xi = 0). $$
+
+        \item  If $T, S$ are invertible linear operators, then $(T S)^{-1} = S^{-1} T^{-1}$ (by supposing,
+              of course, that the operations are well posed).
+
+              Of course $(T S)^{-1} TS = I$, so multiplying both sides (on the right) by $S^{-1}$ we get:
+              $$ (T S)^{-1} T(S S^{-1}) = S^{-1} $$
+              $$ (T S)^{-1} T = S^{-1} $$
+              Similarly with $T^{-1}$,
+              $$ (T S)^{-1}(T T^{-1}) = S^{-1}T^{-1}$$
+              $$ (T S)^{-1} = S^{-1}T^{-1}.$$
 
     \end{enumerate}
 
 \end{exercise}
 
+\begin{exercise}{1.1.9}
+    Let $X$ and $Y$ be finite-dimensional vector spaces and $T : X \to Y$
+    a linear operator. Choose bases in $X$ and $Y$ and show that $T$ can be represented
+    by a matrix, and discuss how the matrix that represents $T$ changes if other bases
+    are considered.
+
+    It's given that $X$ and $Y$ are finite-dimensional, so let $B_x = \{ x_1, ..., x_n \}$ and $B_y = \{y_1, ..., y_m\}$ be their basis, respectively.
+    Consider now an arbitrary element $\xi \in X$, which has an unique representation in terms of $B_x$: $\xi = \alpha_1 x_1 + ... + \alpha_n x_n$.
+    Applying the transformation $T$, we have:
+    $$ T(\xi) = T(\alpha_1 x_1 + ... + \alpha_n x_n) = \alpha_1 T(x_1) + ... + \alpha_n T(x_n)$$
+    We can see, then, that the transformation $T$ is determined by its action on the basis elements of $X$. Each $T(x_i)$ has an unique representation in terms of $B_y$:
+    $T(x_i) = \beta_{1i} y_1 + ... + \beta_{mi} y_m$, for $i = 1, ..., n$.
+    Considering $T$, again:
+    $$ T(\xi) = \sum_{i=1}^n \alpha_i T(x_i) = \sum_{i=1}^n \alpha_i  \sum_{j=1}^m  \beta_{ji} y_j $$
+    $$ = \sum_{j=1}^m ( \sum_{i=1}^n  \beta_{ji} \alpha_i ) y_j $$
+    \[ = \begin{pmatrix}
+            \beta_{11} & \dots  & \beta_{1n} \\
+            \vdots     & \ddots &            \\
+            \beta_{m1} &        & \beta_{mn}
+        \end{pmatrix}
+        \begin{pmatrix}
+            \alpha_{1} \\
+            \vdots     \\
+            \alpha_{n} \\
+        \end{pmatrix}
+        \begin{pmatrix}
+            y_1 & \dots & y_m
+        \end{pmatrix}
+    \]
+
+    Or, in terms of coordinates ($\gamma_i$ being the coordinates of $T(\xi)$ in $Y$):
+
+    \[ \begin{pmatrix}
+            \gamma_{1} \\
+            \vdots     \\
+            \gamma_{n} \\
+        \end{pmatrix}_{B_y}
+        = \begin{pmatrix}
+            \beta_{11} & \dots  & \beta_{1n} \\
+            \vdots     & \ddots &            \\
+            \beta_{m1} &        & \beta_{mn}
+        \end{pmatrix}
+        \begin{pmatrix}
+            \alpha_{1} \\
+            \vdots     \\
+            \alpha_{n} \\
+        \end{pmatrix}_{B_x}
+    \]
+
+    and
+    \[ T = \begin{pmatrix}
+            \beta_{11} & \dots  & \beta_{1n} \\
+            \vdots     & \ddots &            \\
+            \beta_{m1} &        & \beta_{mn}
+        \end{pmatrix}.
+    \]
+
+\end{exercise}
+
+
+\begin{exercise}{1.1.13} Bounded operators.
+
+    \begin{enumerate}
+        \item If $T\in \bounded (\mathcal{N}_1, \mathcal{N}_2)$, check that
+
+              $$ \lVert T \rVert \stackrel{(1)}{=} \inf_{C>0} \{ \lVert T\xi \rVert \leq C \lVert \xi \rVert , \forall \xi \in \mathcal{N}_1 \}
+                  \stackrel{(2)}{=} \sup_{\lVert \xi \rVert = 1} \lVert T \xi \rVert
+                  \stackrel{(3)}{=} \sup_{\xi \neq 0} \frac{\lVert T \xi \rVert}{\lVert \xi \rVert}
+              $$
+
+              It's easiest to start with (2). By definition, $\lVert T \rVert = \sup_{\lVert \xi \rVert \leq 1} \lVert T \xi \rVert$. Let $\xi$ such that $\lVert \xi \rVert < 1$.
+              Then, clearly, $$\lVert T \xi \rVert < \lVert T\left( \frac{\xi}{\lVert \xi \rVert} \right) \rVert = \frac{1}{\lVert \xi \rVert}  \lVert T \xi \rVert.$$
+
+              Thus $\sup_{\lVert \xi \rVert < 1} \lVert T \xi \rVert \leq \sup_{\lVert \xi \rVert = 1} \lVert T \xi \rVert$.
+              This means that we only need to look at the $\xi \in \mathcal{N}_1$ such that $\lVert \xi \rVert = 1$,
+              and therefore $\lVert T \rVert = \sup_{\lVert \xi \rVert = 1} \lVert T \xi \rVert$ is a perfectly equivalent definition of the norm of
+              $\lVert T \rVert$, and (2) holds.
+
+              From (2), we just need to note that (obviously) $\frac{\xi}{\lVert \xi \rVert}$ has norm 1. Then,
+              $$ \sup_{\lVert \xi \rVert = 1} \lVert T \xi \rVert = \sup_{\xi \neq 0} \lVert T \left(\frac{\xi}{\lVert \xi \rVert}\right) \rVert
+                  = \sup_{\xi \neq 0}  \frac{\lVert T \xi \rVert}{\lVert \xi \rVert} , $$
+              obtaining (3).
+
+              To obtain (1), recall that $\lVert T \rVert = \sup_{\xi \in \mathcal{N}_1} \lVert T \left( {\xi}/{\lVert \xi \rVert} \right) \rVert$. This means that given $\epsilon > 0$, there exists $\xi$
+              such that $\lVert T \left( {\xi}/{\lVert \xi \rVert} \right) \rVert > \lVert T \rVert - \epsilon $, or $$\lVert T \left( {\xi}/{\lVert \xi \rVert} \right) \rVert + \epsilon > \lVert T \rVert.$$
+              At the same time, $$\lVert T \left( {\xi}/{\lVert \xi \rVert} \right) \rVert \leq \lVert T \rVert.$$
+              Thus, we conclude that
+              $$\lVert T \rVert = \inf_{C>0} \{ \lVert T \left( {\xi}/{\lVert \xi \rVert} \right) \rVert \leq C\}
+                  = \inf_{C>0} \{ \lVert T \xi \rVert \leq C {\lVert \xi \rVert} , \forall \xi \in \mathcal{N}_1 \}.$$
+
+        \item If $T, S$ are bounded linear operators and $T S$ (the composition, but usually called
+        product of operators) is defined, show that $T S$ is bounded and $\lVert T S \rVert \leq \lVert T \rVert \lVert S \rVert $ .
+        Therefore, if $T^n$ (nth iterate of $T$) is defined, then $\lVert T ^n \rVert \leq \lVert T \rVert ^n$ .
+        
+        Let $\xi \in \dom S$, so $ \lVert T(S(\xi)) \rVert \leq  \lVert T \rVert  \lVert S(\xi) \rVert \leq \lVert T \rVert  \lVert S \rVert \lVert \xi \rVert $. 
+        Dividing both sides by $\lVert \xi \rVert $ and taking the supremum, we get
+        $$ \lVert TS \rVert = \sup_{\xi \neq 0} \frac{\lVert T(S(\xi)) \rVert}{\lVert \xi \rVert } \leq \lVert T \rVert  \lVert S \rVert . $$
+
+        If we choose $S = T$, we arrive at $\lVert T^2 \rVert \leq \lVert T \rVert ^2$. Replacing $T$ by $T^{n-1}$, we get $\lVert T^{n} \rVert \leq \lVert T \rVert ^{n}$, 
+        for all $n$.
+
+
+    \end{enumerate}
+
+\end{exercise}
 
 
 \end{document}
