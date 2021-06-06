@@ -20,6 +20,17 @@
 
 \DeclareMathOperator{\bounded}{B}
 
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+
+
+\DeclareMathOperator{\Natural}{\mathbb{N}}
+\DeclareMathOperator{\Integer}{\mathbb{Z}}
+\DeclareMathOperator{\Rational}{\mathbb{Q}}
+\DeclareMathOperator{\Real}{\mathbb{R}}
+\DeclareMathOperator{\Complex}{\mathbb{C}}
+\DeclareMathOperator{\field}{\mathbb{F}}
+
+
 
 \renewcommand{\labelenumi}{\alph{enumi})}
 
@@ -185,20 +196,130 @@
                   = \inf_{C>0} \{ \lVert T \xi \rVert \leq C {\lVert \xi \rVert} , \forall \xi \in \mathcal{N}_1 \}.$$
 
         \item If $T, S$ are bounded linear operators and $T S$ (the composition, but usually called
-        product of operators) is defined, show that $T S$ is bounded and $\lVert T S \rVert \leq \lVert T \rVert \lVert S \rVert $ .
-        Therefore, if $T^n$ (nth iterate of $T$) is defined, then $\lVert T ^n \rVert \leq \lVert T \rVert ^n$ .
-        
-        Let $\xi \in \dom S$, so $ \lVert T(S(\xi)) \rVert \leq  \lVert T \rVert  \lVert S(\xi) \rVert \leq \lVert T \rVert  \lVert S \rVert \lVert \xi \rVert $. 
-        Dividing both sides by $\lVert \xi \rVert $ and taking the supremum, we get
-        $$ \lVert TS \rVert = \sup_{\xi \neq 0} \frac{\lVert T(S(\xi)) \rVert}{\lVert \xi \rVert } \leq \lVert T \rVert  \lVert S \rVert . $$
+              product of operators) is defined, show that $T S$ is bounded and $\lVert T S \rVert \leq \lVert T \rVert \lVert S \rVert $ .
+              Therefore, if $T^n$ (nth iterate of $T$) is defined, then $\lVert T ^n \rVert \leq \lVert T \rVert ^n$ .
 
-        If we choose $S = T$, we arrive at $\lVert T^2 \rVert \leq \lVert T \rVert ^2$. Replacing $T$ by $T^{n-1}$, we get $\lVert T^{n} \rVert \leq \lVert T \rVert ^{n}$, 
-        for all $n$.
+              Let $\xi \in \dom S$, so $ \lVert T(S(\xi)) \rVert \leq  \lVert T \rVert  \lVert S(\xi) \rVert \leq \lVert T \rVert  \lVert S \rVert \lVert \xi \rVert $.
+              Dividing both sides by $\lVert \xi \rVert $ and taking the supremum, we get
+              $$ \lVert TS \rVert = \sup_{\xi \neq 0} \frac{\lVert T(S(\xi)) \rVert}{\lVert \xi \rVert } \leq \lVert T \rVert  \lVert S \rVert . $$
 
+              If we choose $S = T$, we arrive at $\norm{T^2} \leq \norm{T}^2$. Replacing $T$ by $T^{n-1}$, we get $\norm{T^{n}} \leq  \norm{T} ^{n}$,
+              for all $n$.
 
     \end{enumerate}
 
 \end{exercise}
 
+\begin{exercise}{1.1.18}
+    Let $(e_n)_{n=1}^{\infty}$ be the usual basis of $l^2(\Natural)$ and $(\alpha_n)_{n=1}^{\infty}$ a sequence in $\field$.
+    Show that the operator $T : l^2(\Natural) \hookleftarrow$ with $T e_n = \alpha_n e_n$ is bounded if, and only if, $(\alpha_n)_{n=1}^{\infty}$
+    is a bounded sequence. Verify that, in this case, $ \norm{T} = \sup_n |\alpha_n|$.
+
+    Suppose $T$ is bounded. Then
+    \begin{align*}
+        \norm{T e_n}         & \leq \norm{T} \norm{e_n} \\
+        \norm{\alpha_n e_n}  & \leq \norm{T} \norm{e_n} \\
+        |\alpha_n|\norm{e_n} & \leq \norm{T} \norm{e_n} \\
+        |\alpha_n|           & \leq \norm{T}
+    \end{align*}
+    so $\alpha_n$ is bounded.
+
+    Reciprocally, suppose the sequence $\alpha_n$ is bounded. Consider $\xi \in l^2(\Natural)$,
+    $$\norm{T\xi} = \norm{T(\sum_i c_i e_i)} = \norm{\sum_i c_i \alpha_i e_i} \leq \sup_n |\alpha_n| \norm{\sum_i c_i e_i} = \sup_n |\alpha_n| \norm{\xi}$$
+    so $T$ is bounded and $\norm{T} = \sup_n |\alpha_n|$.
+\end{exercise}
+
+\begin{exercise}{1.1.19} Let $C^1 (0, 1)$ be the set of continuously differentiable real functions on $(0, 1)$, as a subspace of $L^2 (0, 1)$
+    (i.e., use the norm of $L^2$). Apply the differential operator $(D\psi)(t) = \psi'(t), D : C^1 (0, 1) \to L^2 (0, 1)$, to functions $\psi_n (t) = \sin(n \pi t)$
+    and conclude that D is not bounded.
+
+    For each $n$, $\norm{\psi_n} \leq 1$. Indeed:
+
+    $$\int_0^1 |\sin n\pi t|^2 dt = \int_0^1 \frac{|1 - \cos 2n \pi x|}{2} dt = \left[\frac{t}{2} - \frac{\sin 2 n \pi x}{4 n \pi}\right]_0^1 = 1/2. $$
+
+
+    Let's consider $D \psi_n = D \sin n \pi t = n \pi \cos n \pi t$. Taking the norm,
+    $$ \norm{D\psi_n} = \int_0^1 |n \pi \cos n \pi t|^2 dt = |n\pi|^2 \int_0^1 |\cos n \pi t|^2 dt$$
+    $$ = |n\pi|^2 \int_0^1 \frac{1 + |\cos 2n \pi t|}{2} dt = \frac{|n\pi|^2}{2} \left[ t + \frac{\sin 2n \pi t}{2 n \pi} \right]_0^1 = \frac{|n\pi|^2}{2}. $$
+    Thus $\norm{D \psi_n}  \to \infty $ as $n \to \infty$, so $D$ is not bounded.
+
+\end{exercise}
+
+\begin{exercise}{1.1.20}
+    Show that the differential operator $D : C^{\infty} [a, b] \hookleftarrow $ is not bounded for any norm on $C^\infty[a, b]$.
+
+    Consider the sequence of polinomials $(t^n)_{n\in\Natural}$. Then $\norm{Dt^n} = \norm{nt^{n-1}} = n \norm{t^{n-1}}$. Since we can have $n\to\infty$, $D$ can't be bounded.
+
+\end{exercise}
+
+\begin{exercise}{1.1.22}
+    Suppose that $T_n \to T$ in $\bounded(\mathcal{N})$ and $\xi_n \to \xi$ in $\mathcal{N}$. Show that $T_n\xi_n \to T \xi$.
+
+    Let's first derive the following inequality:
+    $$ \norm{T\xi - T_n\xi_n} =  \norm{T\xi - T_n\xi + T_n\xi -T_n\xi_n }$$
+    $$ \leq \norm {T\xi - T_n\xi} + \norm{T_n\xi -T_n\xi_n} $$
+    Now we show that each of those terms converge to $0$:
+
+    First, $ \norm {T\xi - T_n\xi} = \norm{(T-T_n)\xi} \leq \norm{T-T_n} \norm{\xi}$.
+    Since $T_n \to T$, we can take $\norm{T-T_n} < \frac{\epsilon}{2 \norm{\xi}}$, so $\norm {T\xi - T_n\xi} < \frac{\epsilon}{2}$ (for $n = n'$).
+
+    Similarly, $ \norm{T_n\xi -T_n\xi_n} \leq \norm{T_n} \norm{\xi - \xi_n}$, and we can take $\norm{\xi - \xi_n} < \frac{\epsilon}{2\norm{T_n}}$
+    leaving $\norm{T_n\xi -T_n\xi_n} < \frac{\epsilon}{2}$ (for $n = n''$).
+
+    We conclude, then, $\norm{T\xi - T_n\xi_n} < \epsilon$ (for $n = \max\{n', n''\}$) , which means that $T_n\xi_n \to T \xi$.
+
+
+\end{exercise}
+
+\begin{exercise}{1.1.23} Let $T \in \bounded(\mathcal{B})$. Show that, for all $t \in \field$, the operator $e^{tT}$ defined by the series
+    $$ e^{tT} := \sum_{j=0}^{\infty} \frac{(tT)^j}{j!} $$
+    belongs to $\bounded(\mathcal{B})$ and $\norm{e^{tT}} \leq e^{|t|\norm{T}}$.
+
+    $$ \norm{e^{tT}} = \norm{\sum_{j=0}^{\infty} \frac{(tT)^j}{j!}} \leq \sum_{j=0}^{\infty} \frac{\norm{(tT)^j}}{j!}
+        \stackrel{*}{\leq} \sum_{j=0}^{\infty} \frac{\norm{tT}^j}{j!} = \sum_{j=0}^{\infty} \frac{(|t|\norm{T})^j}{j!} = e^{|t|\norm{T}}.$$
+
+    * by 1.1.13.(b).
+
+
+\end{exercise}
+
+\begin{exercise}{1.1.24}
+    Let $T \in \bounded (\mathcal{B})$, with $\norm{T}<1$. Show that the operator defined by the series $S = \sum_{j=0}^\infty T^j$ belongs to $\bounded (\mathcal{B})$
+    and $S = (1-T)^{-1}.$
+
+    $$\norm{S} = \norm{\sum_{j=0}^\infty T^j} \leq \sum_{j=0}^\infty \norm{T^j} \leq \sum_{j=0}^\infty \norm{T}^j.$$
+    Since $\norm{T} < 1$, the right side is a geometric series and converges.
+
+    To verify that $S = (1-T)^{-1}$,
+    $$ S (1-T) = \sum_{j=0}^\infty T^j (1-T) = \sum_{j=0}^\infty T^j - T^{j+1}$$
+    $$ = \sum_{j=0}^\infty T^j - \sum_{j=1}^\infty T^j = T^0 = 1.$$
+
+\end{exercise}
+
+\begin{exercise}{1.1.30}
+    Show that the dual of $l^p$ is $l^q$, with $1 < p < \infty$ and $1/p + 1/q = 1$.
+
+\end{exercise}
+
+\begin{exercise}{1.1.35}
+    Let $S_l : l^2 (\Natural) \hookleftarrow$ be the shift $S_l (\xi_1 , \xi_2 , \xi_3 , \dots) = (\xi_2 , \xi_3 , \xi_4 , \dots)$
+    and $T_n = S_l^n$. Find $\norm{T_n\xi}$, and the limit operator described in the Banach-Steinhaus theorem.
+
+\end{exercise}
+
+\begin{exercise}{1.1.38}
+
+    Verify that $C_p [0, 2\pi]$ is a Banach space, and also the validity of the expression for a partial sum for the Fourier series used in the proof of Corollary 1.1.37.
+
+
+\end{exercise}
+
+\begin{exercise}{1.1.39}
+
+\end{exercise}
+
+\begin{exercise}{1.1.42}
+
+\end{exercise}
 
 \end{document}
