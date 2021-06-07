@@ -305,6 +305,15 @@
     Let $S_l : l^2 (\Natural) \hookleftarrow$ be the shift $S_l (\xi_1 , \xi_2 , \xi_3 , \dots) = (\xi_2 , \xi_3 , \xi_4 , \dots)$
     and $T_n = S_l^n$. Find $\norm{T_n\xi}$, and the limit operator described in the Banach-Steinhaus theorem.
 
+    Given $T_n$, let $e_{n+1}$ be the nth element of the canonical basis of $l^2$. Also, $\norm{e_{n+1}} = 1$ and $\norm{T_n e_{n+1}} = 1$, so $\norm{T_n} \geq 1$.
+
+    Now, given an arbitrary $\xi = (\xi_1, \xi_2, \dots) \in l^2$ with $\norm{\xi}=1$. This means that $\norm{\xi} = \sum_{i=1}^\infty \xi_i^2 = 1$. 
+    Thus, $\norm{T_n \xi} = \sum_{i=n+1}^\infty \xi_i^2 \leq 1$ necessarily. So $\norm{T_n} \leq 1$. In conclusion, $\norm{T_n}=1$.
+
+    By the Banach-Steinhaus theorem there exists the limit $T\xi = \lim_{n\to \infty} T_n \xi$. 
+    $$\norm{T\xi} = \norm{\lim_{n\to \infty} T_n \xi} = \lim_{n\to \infty} \norm{T_n \xi} = \lim_{n\to \infty} \sum_{i=n+1}^\infty \xi_i^2 = \lim_{n\to \infty} \xi_i = 0$$
+    Therefore $T\xi = 0$.
+
 \end{exercise}
 
 \begin{exercise}{1.1.38}
@@ -314,11 +323,16 @@
 
 \end{exercise}
 
-\begin{exercise}{1.1.39}
+\begin{exercise}{1.1.39} (Cauchy Schwarz inequality)
 
 \end{exercise}
 
 \begin{exercise}{1.1.42}
+    If $f \in H^*$, what is the dimension of $\kernel(f)^\perp$?
+
+    1 I think?
+
+    $\dim (\kernel(f)^\perp )= \dim \field = 1.$
 
 \end{exercise}
 
