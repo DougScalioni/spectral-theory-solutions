@@ -29,6 +29,10 @@
 \DeclareMathOperator{\Real}{\mathbb{R}}
 \DeclareMathOperator{\Complex}{\mathbb{C}}
 \DeclareMathOperator{\field}{\mathbb{F}}
+\DeclareMathOperator{\banach}{\mathcal{B}}
+\DeclareMathOperator{\hilbert}{\mathcal{H}}
+\DeclareMathOperator{\normed}{\mathcal{N}}
+\DeclareMathOperator{\graph}{\mathcal{G}}
 
 
 
@@ -307,10 +311,10 @@
 
     Given $T_n$, let $e_{n+1}$ be the nth element of the canonical basis of $l^2$. Also, $\norm{e_{n+1}} = 1$ and $\norm{T_n e_{n+1}} = 1$, so $\norm{T_n} \geq 1$.
 
-    Now, given an arbitrary $\xi = (\xi_1, \xi_2, \dots) \in l^2$ with $\norm{\xi}=1$. This means that $\norm{\xi} = \sum_{i=1}^\infty \xi_i^2 = 1$. 
+    Now, given an arbitrary $\xi = (\xi_1, \xi_2, \dots) \in l^2$ with $\norm{\xi}=1$. This means that $\norm{\xi} = \sum_{i=1}^\infty \xi_i^2 = 1$.
     Thus, $\norm{T_n \xi} = \sum_{i=n+1}^\infty \xi_i^2 \leq 1$ necessarily. So $\norm{T_n} \leq 1$. In conclusion, $\norm{T_n}=1$.
 
-    By the Banach-Steinhaus theorem there exists the limit $T\xi = \lim_{n\to \infty} T_n \xi$. 
+    By the Banach-Steinhaus theorem there exists the limit $T\xi = \lim_{n\to \infty} T_n \xi$.
     $$\norm{T\xi} = \norm{\lim_{n\to \infty} T_n \xi} = \lim_{n\to \infty} \norm{T_n \xi} = \lim_{n\to \infty} \sum_{i=n+1}^\infty \xi_i^2 = \lim_{n\to \infty} \xi_i = 0$$
     Therefore $T\xi = 0$.
 
@@ -337,5 +341,139 @@
 \end{exercise}
 
 \subsection{Closed Operators}
+
+
+\begin{exercise}{1.2.3}
+    Show that $T : l^1 (\Natural) \hookleftarrow$ given by $$T (\xi_1, \xi_2, \xi_3, \dots ) = (\xi_1 /1, \xi_2 /2,\xi_3 /3, \dots )$$
+    is linear, continuous and invertible, but its inverse $T^{-1}$, defined on the
+    range of $T$, is not a continuous operator.
+
+
+    Suppose and arbitrary $\xi \in l^1(\Natural)$.
+    $$\norm{\xi} = \sum_{n=1} \xi_n = \xi_1 + \sum_{n=2} \xi_n.$$
+    $$ \norm{T\xi} = \sum_{n=1} \xi_n/n = \xi_1 + \sum_{n=2} \xi_n/n $$
+    So,
+    $$ \norm{T\xi} \leq \xi_1 + \frac{1}{2} \sum_{n=2} \xi_n \leq \norm{\xi}$$
+    and we can conclude that $T$ is bounded.
+
+    Let's consider now its inverse $ T(1\xi_1, 2\xi_2, 3\xi_3, \dots) = (\xi_1, \xi_2,\xi_3, \dots)$. Let $e_n$ be the sequence in $l^1$ with $1$ in its n-th coordinate and
+    $0$ everywhere else. Clearly $\norm{e_n} = 1 \forall n$, but $\norm{Te_n} = n$, which goes to infinity as $n\to\infty$. Thus, $\sup T(e_n) = \infty$, and $T$ in not bounded.
+
+\end{exercise}
+
+\begin{exercise}{1.2.9}
+
+
+    \begin{enumerate}
+
+        \item Show that $\banach_1 \times \banach_2$ with the norm
+              $$\norm{(\xi, \eta)} = \left(\norm{\xi}^2_{\banach_1} + \norm{\eta}^2_{\banach_2}\right)^{\frac{1}{2}}$$
+              defined above is a Banach space.
+
+              Consider a cauchy sequence $(\xi,\eta)_n=(\xi_n, \eta_n)$. This means that, given $\epsilon>0$, there exists $n_0$ such that, if $n, m > n_0$,
+              $$ \norm{(\xi,\eta)_n - (\xi,\eta)_m} = \left(\norm{\xi_n - \xi_m}^2_{\banach_1} + \norm{\eta_n-\eta_m}^2_{\banach_2}\right)^{\frac{1}{2}} < \epsilon$$
+              $$ \left(\norm{\xi_n-\xi_m}_{\banach_1} + \norm{\eta_n - \eta_m}_{\banach_2}\right)^2 \leq \norm{\xi_n-\xi_m}^2_{\banach_1} + \norm{\eta_n - \eta_m}^2_{\banach_2} < \epsilon^2$$
+              $$ \norm{\xi_n-\xi_m}_{\banach_1} + \norm{\eta_n - \eta_m}_{\banach_2} < \epsilon$$
+              Since the norms are necessarily positive, and are both smaller than arbitrary $\epsilon$, we can conclude that $\xi_n$ and $\eta_n$ are cauchy
+              in $\banach_1$ and $\banach_2$ respectively, and therefore $\xi_n \to \xi$ and $\eta_n \to \eta$.
+
+              Thus, our candidate for the convergence of $(\xi_n,\eta_n)$ is $(\xi,\eta)$. Let's investigate this convergence.
+              $$ \norm{(\xi_n,\eta_n) - (\xi,\eta)} = \norm{(\xi_n-\xi,\eta_n-\eta)} $$
+              $$ = \left(\norm{\xi_n-\xi}^2_{\banach_1} + \norm{\eta_n-\eta}^2_{\banach_2}\right)^{\frac{1}{2}}$$
+              From the individual convergences of $\xi$ and $\eta$,
+              $$ \norm{(\xi_n,\eta_n) - (\xi,\eta)} < \sqrt{\epsilon^2 + \epsilon^2} = \sqrt{2} \epsilon. $$
+              We've shown then that any cauchy sequence converges, and so this space is Banach.
+
+
+        \item Show that $T$ is a closed operator iff $\dom T$ with the graph norm is a Banach space.
+
+              (Should we consider here $T: \banach_1 \to \banach_2$ ? If so:)
+              $T$ is closed if its graph is a closed subset of $\banach_1 \times \banach_2$. A closed subset of a complete space is complete.
+              A complete subset of a complete space is closed.
+    \end{enumerate}
+
+\end{exercise}
+
+\begin{exercise}{1.2.10}
+    Verify that $\graph(T)$ is a vector subspace of $\normed_1 \times \normed_2$ and the equivalence quoted in the above definition of closed operator.
+
+    Let $\xi, \psi \in \dom T$ and $\alpha \in \field$. Of course, $(\xi, T\xi), (\psi, T\psi) \in \graph(T)$.
+    Since $\xi+\alpha \psi \in \dom T$ and $(\xi+\alpha \psi, T(\xi+\alpha \psi)) \in \graph(T)$.
+    $$ (\xi+\alpha \psi, T(\xi+\alpha \psi)) = (\xi+\alpha \psi, T\xi+ \alpha T \psi) = (\xi, T\xi) + \alpha(\psi, T\psi) \in \graph(T)$$
+    So $\graph(T)$ is a vector subspace.
+
+
+    Now to show the equivalence, suppose $(\xi_n, T\xi_n)\in \normed_1 \times \normed_2$ converges to $(\xi, \eta)$. It's clear that it can only happen if and only if
+    $\xi_n \to \xi$ and $T\xi_n \to \eta$ in $\normed_1, \normed_2$ respectively.
+    Then, the graph $\graph(T)$ is closed if and only if it contains the limit  $(\xi_n, T\xi_n) = (\xi,\eta)$ (since our sequence is arbitrary).
+    By the uniqueness of limits, $T(\xi) = \eta.$
+
+
+
+\end{exercise}
+
+\begin{exercise}{1.2.12}
+    Consider the linear operator $T : \dom T \subset \normed_1 \to \normed_2$, and let $\pi_1 : \graph(T) \to \dom T$
+    and $\pi_2 : \graph(T) \to \rng T$ be the natural projections $\pi_1 (\xi, T \xi) = \xi$
+    and $\pi_2 (\xi, T \xi) = T\xi$, for $\xi \in \dom T$. Show that such projections are continuous linear operators.
+
+    It's easy to see that, given $(\xi, t\xi) \in \graph T$,
+    $$\norm{\pi_1 (\xi, t\xi)}_{\normed_1} = \norm{\xi}_{\normed_1}\leq \norm{(\xi, t\xi)}_{\graph}=\sqrt{\norm{\xi}_{\normed_1}^2 + \norm{T\xi}_{\normed_2}^2}$$
+    and
+    $$\norm{\pi_2 (\xi, t\xi)}_{\normed_2} = \norm{T\xi}_{\normed_2}\leq \norm{(\xi, t\xi)}_{\graph}=\sqrt{\norm{\xi}_{\normed_1}^2 + \norm{T\xi}_{\normed_2}^2}$$
+    or more simply, because the projections are (weak) contractions.
+
+
+
+\end{exercise}
+
+\begin{exercise}{1.2.14}
+    If $\dim \normed_1 < \infty$, show that every linear operator $T : \dom T \subset \normed_1 \to \normed_2$ is closed.
+
+    Since $\dim \normed_1 < \infty$, $\normed_1$ is complete. The range of $\normed_1$ is also a finite normed vector space, and therefore complete. By the proposition 1.2.13
+    (Any operator $T \in \bounded(\banach_1,\banach_2)$ is closed.), $T$ is closed.
+
+
+\end{exercise}
+
+\begin{exercise}{1.2.16}
+    If $\normed \subset \banach$, show that $T \in \bounded(\normed , \banach)$ is closed if, and only if, $N$ is a Banach space.
+
+    If $\normed$ is a Banach space, then $T$ is closed by the proposition 1.2.13.
+    On the other hand, if $\normed$ is not complete, there is a cauchy sequence $(\xi_n)$ that converges to $\xi$ in $\banach \setminus \normed$.
+    The sequence $T\xi_n$ is also cauchy (because $T$ is uniformly continuous) and converges in $\banach$. But since $\xi \notin \normed$, $T$ is not closed.
+
+
+\end{exercise}
+
+\begin{exercise}{1.2.19}
+    From Example 1.2.18, show that if $(\psi_j )_{j=1}^\infty \subset C^1[0, \pi]$ is such that
+    the series $\psi(t) = \sum_{j=1}^\infty \psi_j (t)$ and $\varphi(t) = \sum_{j=1}^\infty \psi_j' (t)$ converge uniformly, then $\psi$
+    is continuously differentiable and $\varphi=\psi'$.
+
+    Fazer depois.
+
+
+\end{exercise}
+
+\begin{exercise}{1.2.24}
+    Let $E$ be a subspace of $\normed_1 \times \normed_2$. Show that $E$ is the graph of a linear operator if, and only if, $E$ does not contain any element of the form $(0, \eta)$,
+    with $\eta \neq 0$.
+
+    Any linear operator takes $0$ to $0$, therefore if $E$ is a graph of a linear operator, it cannot possibly contain $(0, \eta \neq 0)$. 
+    Reciprocally, suppose it doesn't contain such element. $E$ is a linear subspace, and so are its projections onto $\normed_1$ and $\normed_2$: $\pi_{1}(E)$ and $\pi_{2}(E)$. 
+    Then we can define a linear transformation by relating the elements of the basis of $\pi_{1}(E)$ and $\pi_{2}(E)$ (as long as $\dim \pi_1 > \dim \pi_2$, right? CHECK THIS).
+
+
+\end{exercise}
+
+\begin{exercise}{1.2.26}
+
+\end{exercise}
+
+\begin{exercise}{1.2.28}
+
+\end{exercise}
+
 
 \end{document}
