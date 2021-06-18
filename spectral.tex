@@ -34,7 +34,7 @@
 \newcommand{\closure}[1]{\overline{ #1}}
 \newcommand{\inner}[2]{\langle #1, #2 \rangle}
 \newcommand{\openball}[2]{\text{B}\left(#1;#2\right)}
-\newcommand{\ball}{\openball}
+\newcommand{\ball}[2]{\openball{#1}{#2}}
 \newcommand{\closedball}[2]{\text{B}\left[#1;#2\right]}
 
 
@@ -548,6 +548,11 @@
 \end{exercise}
 
 \begin{exercise}{1.3.12}
+    Let $T : \normed_1 \to \normed_2$ linear. Show that it is compact if, and only if, $T \ball{0}{1}$ is precompact in $\normed_2$. 
+
+    Clearly $\ball{0}{1}$ is bounded, and so $T \ball{0}{1}$ is precompact. Conversely, if $\ball{0}{1}$ is precompact, $\closedball{0}{1}$ is compact, and so $\normed_2$
+    must be finite dimensional (otherwise, the closed ball wouldn't be compact). Since $\normed_2$ is finite dimensional, $T$ is finite rank, thus compact.
+
 
 \end{exercise}
 
