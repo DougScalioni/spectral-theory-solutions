@@ -34,6 +34,8 @@
 \newcommand{\closure}[1]{\overline{ #1}}
 \newcommand{\inner}[2]{\langle #1, #2 \rangle}
 \newcommand{\openball}[2]{\text{B}\left(#1;#2\right)}
+\newcommand{\ball}{\openball}
+\newcommand{\closedball}[2]{\text{B}\left[#1;#2\right]}
 
 
 
@@ -48,6 +50,7 @@
 \DeclareMathOperator{\hilbert}{\mathcal{H}}
 \DeclareMathOperator{\normed}{\mathcal{N}}
 \DeclareMathOperator{\graph}{\mathcal{G}}
+\DeclareMathOperator{\id}{\textbf{1}}
 
 
 
@@ -318,6 +321,8 @@
 \begin{exercise}{1.1.30}
     Show that the dual of $l^p$ is $l^q$, with $1 < p < \infty$ and $1/p + 1/q = 1$.
 
+    \textcolor{red}{nao manjei}
+
 \end{exercise}
 
 \begin{exercise}{1.1.35}
@@ -349,7 +354,7 @@
 \begin{exercise}{1.1.42}
     If $f \in H^*$, what is the dimension of $\kernel(f)^\perp$?
 
-    1 I think?
+    \textcolor{red}{1 I think?}
 
     $\dim (\kernel(f)^\perp )= \dim \field = 1.$
 
@@ -402,7 +407,7 @@
 
         \item Show that $T$ is a closed operator iff $\dom T$ with the graph norm is a Banach space.
 
-              (Should we consider here $T: \banach_1 \to \banach_2$ ? If so:)
+              \textcolor{red}{(Should we consider here $T: \banach_1 \to \banach_2$ ? If so:)}
               $T$ is closed if its graph is a closed subset of $\banach_1 \times \banach_2$. A closed subset of a complete space is complete.
               A complete subset of a complete space is closed.
     \end{enumerate}
@@ -534,6 +539,11 @@
 \end{exercise}
 
 \begin{exercise}{1.3.6}
+    If $\dim \normed = \infty$, show that the identity operator $\id : \normed \hookleftarrow$ is not compact (use, for instance, Riesz’s Lemma 1.6.2).
+
+    To show that $\id$ isn't compact, we must provide a set in $\normed$ that is bounded but isn't precompact. Well, if the dimension is infinite, we can choose
+    the unitary open ball $\openball{0}{1}$ as our bounded set (it is clearly bounded). However, it is not precompact because notably the closed ball 
+    $ \closure{\openball{0}{1}} = \closedball{0}{1}$ is not compact on infinite dimension.
 
 \end{exercise}
 
