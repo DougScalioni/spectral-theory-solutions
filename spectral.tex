@@ -53,6 +53,7 @@
 \DeclareMathOperator{\id}{\textbf{1}}
 \DeclareMathOperator{\strongly}{\stackrel{s}{\longrightarrow}}
 \DeclareMathOperator{\weakly}{\stackrel{w}{\longrightarrow}}
+\DeclareMathOperator{\linspan}{\text{Lin}}
 
 
 
@@ -594,27 +595,71 @@
     $$ T_n \xi = \left(0, 0, \dots, 0, \xi_{1} , \xi_{2} , \xi_{3}, \dots \right)$$
     (n-shift) converges weakly to zero, but does not converge strongly.
 
-    Let $f \in (l^2)^*$ and $\xi \in l^2$.
-    $$ | f(T_n \xi) - f(T \xi) | $$
+    The tricky part here is that the shift operator preserves the entries of the vectors it's applied to, it just shifts them, so it preserves the norm.
+    So if given a $\xi \in l^2$,
+    $$ \norm{T_n \xi} = \sum_{k=1}^n 0^2 +  \sum_{k=n+1} \xi_{k-n}^2 = \sum_{k=1}\xi_k^2 = \norm{\xi}.$$
+    For this reason, it doesn't converge strongly.
 
-    $$ |\norm{T_n \xi} - \norm{T \xi}| \leq \norm{T_n \xi - T \xi}$$
+    However, we can show that it converges weakly. We just have to notice this aspect of the linear functionals. Given $f \in (l^2)^*$, $\xi \in l^2$, and a basis $(e_n)$ of $l^2$,
+    $$ |f(\xi)| = |f(\sum \xi_n e_n)| = |\sum \xi_n f(e_n)| < \infty.$$
+    From this, it follows that $f(e_n) \to 0$. (\textcolor{red}{To show this, suppose it didn't. ...})
 
-    $$ |a + b - a| \leq |a| + |b - a|$$
-    $$ |b| - |a| \leq |b-a|$$
+    Then,
+    $$ \lim_n |f(T_n \xi)| = \lim_n |\sum_k \xi_k f(T_n e_k)| = |\sum_k \xi_k \lim_n f(e_{k+n})| = 0$$
 
-    \textcolor{red}{tentar com epsilons e deltas}
 
 \end{exercise}
 
 \begin{exercise}{1.3.21}
-    \textcolor{red}{pedir arrego.}
+    Show that every orthonormal sequence in a Hilbert space converges weakly to zero and has no strongly convergent subsequence.
+
+    \textcolor{red}{pedir arrego na primeira parte}
+
+    Let $(T_n)$ be a orthonormal sequence in $\hilbert$. The distance between any two terms is
+    $$\norm{T_n - T_m} = \inner{T_n - T_m}{T_n - T_m} = \inner{T_n}{T_n} - \inner{T_n}{T_m} - \inner{T_m}{T_n} + \inner{T_m}{T_m}$$
+    $$ \norm{T_n} + 0 + 0 + \norm{T_m} = 2$$
+    So it can't possibly converge strongly.
+
+    \textcolor{red}{estou tendo dificuldade com convergencia fraca. Por exemplo, a proposicao 1.3.22: nao entendi. Uma sequencia fracamente convergente e limitada?}
+
+
+
+
 \end{exercise}
 
 \begin{exercise}{1.3.26}
+    Let $T \in \bounded(\hilbert)$, with $\hilbert$ separable. Show that there is a sequence $(T_n)$ of finite rank operators which converges strongly to $T$,
+    that is, $T_n \strongly T$.
+
+    The space $\hilbert$ is separable, therefore it has a enumerable basis $(e_n)$. By the parseval identity, for any $\xi \in \hilbert$,
+    $$ \norm{\xi} = \sum_{k=1}^\infty |\inner{e_k}{\xi}|^2$$
+    and since this series has got to converge, $\lim_{k\to\infty} |\inner{e_k}{\xi}| = 0$.
+
+    Now consider the finite rank operator $T_n = TP_n$, where $P_n$ is the projection onto the subspace given by $\linspan(e_1,\dots,e_n)$.
+
+
+    $$ \norm{T_n \xi - T\xi}^2 = \sum_{k=1}^\infty |\inner{e_k}{(T_n - T)\xi}|^2$$
+    $$ = \sum_{k=1}^\infty |\inner{e_k}{T_n\xi} - \inner{e_k}{T\xi}|^2 =
+        \begin{cases}
+            0                     & k \leq n \\
+            |\inner{e_k}{T\xi}|^2 & k > n
+        \end{cases}
+    $$
+
+    $$ = \sum_{k=n}^\infty |\inner{e_k}{T\xi}|^2$$
+    so,
+    $$ \lim_{n \to \infty} \sum_{k=n}^\infty |\inner{e_k}{T\xi}|^2 = 0$$
+    and $T_n \strongly T$.
+
 
 \end{exercise}
 
 \begin{exercise}{1.3.31}
+    Show that a precompact set (compact) in $(C[a, b], \norm{.}_\infty )$ is precompact (compact) in $L^2[a, b]$. This occurs because the identity map 
+    $\id : (C[a, b]\norm{.}_\infty) \to L^2 [a, b]$ is continuous.
+
+    The bounded operator $\id$ is continuous, therefore the image of a compact set is compact. Also, $f\left(\closure{A}\right) = \closure{f(A)}$, because of sequential continuity.
+
 
 
 \end{exercise}
