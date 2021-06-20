@@ -54,6 +54,7 @@
 \DeclareMathOperator{\strongly}{\stackrel{s}{\longrightarrow}}
 \DeclareMathOperator{\weakly}{\stackrel{w}{\longrightarrow}}
 \DeclareMathOperator{\linspan}{\text{Lin}}
+\DeclareMathOperator{\hs}{\text{HS}}
 
 
 
@@ -620,7 +621,7 @@
     $$ \norm{T_n} + 0 + 0 + \norm{T_m} = 2$$
     So it can't possibly converge strongly.
 
-    \textcolor{red}{estou tendo dificuldade com convergencia fraca. Por exemplo, a proposicao 1.3.22: nao entendi. Uma sequencia fracamente convergente e limitada?}
+    \textcolor{red}{estou tendo dificuldade com convergencia fraca. Por exemplo, a proposicao 1.3.22: nao entendi. Uma sequencia fracamente convergente eh limitada?}
 
 
 
@@ -651,11 +652,13 @@
     $$ \lim_{n \to \infty} \sum_{k=n}^\infty |\inner{e_k}{T\xi}|^2 = 0$$
     and $T_n \strongly T$.
 
+    \textcolor{red}{preciso verificar, e corrigir esse argumento de que $\sum_{n\to\infty}^\infty a_n = \lim_{n\to\infty} a_n$}
+
 
 \end{exercise}
 
 \begin{exercise}{1.3.31}
-    Show that a precompact set (compact) in $(C[a, b], \norm{.}_\infty )$ is precompact (compact) in $L^2[a, b]$. This occurs because the identity map 
+    Show that a precompact set (compact) in $(C[a, b], \norm{.}_\infty )$ is precompact (compact) in $L^2[a, b]$. This occurs because the identity map
     $\id : (C[a, b]\norm{.}_\infty) \to L^2 [a, b]$ is continuous.
 
     The bounded operator $\id$ is continuous, therefore the image of a compact set is compact. Also, $f\left(\closure{A}\right) = \closure{f(A)}$, because of sequential continuity.
@@ -665,6 +668,58 @@
 \end{exercise}
 
 \subsection{Hilbert-Schmidt Operators}
+
+\begin{exercise}{1.4.5}
+    Show that $\norm{.}_{\hs}$ is a norm and that $\norm{TS}_{\hs} \leq \norm{T}_{\hs} \norm{S}_{\hs}$.
+
+    We could show that $\norm{.}_{\hs}$ is norm simply by showing it is induced by $\inner{.}{.}_{\hs}$, which is clear. We can also show it directly:
+
+    $$ \norm{T}_{\hs} = \left(\sum_j \norm{T e_j}^2\right)^{\frac{1}{2}}$$
+
+    Clearly, the norm is zero iff $T(e_j) = 0 \forall e_j \Rightarrow T = 0$. Also $\norm{\alpha T}_{\hs} = |\alpha|\norm{T}_{\hs}$,
+    which comes from the very property of the conventional operator norm.
+
+    Finally, the triangular inequality:
+    $$ \norm{T + S}^2_{\hs} = \sum_j \norm{T e_j + S e_j}^2 \leq \sum_j \left(\norm{T e_j} + \norm{S e_j}\right)^2$$
+    $$ \leq \sum_j \norm{T e_j}^2 + \norm{S e_j}^2 = \sum_j \norm{T e_j}^2 + \sum_j \norm{S e_j}^2 = \norm{T}_{\hs}^2 + \norm{S}_{\hs}^2 $$
+    Taking the root on both edges,
+
+    \begin{align}
+        \norm{T+S}_{\hs} & \leq  \sqrt{\norm{T}_{\hs}^2 + \norm{S}_{\hs}^2}                              \\
+                         & \leq \sqrt{\norm{T}_{\hs}^2 + 2\norm{T}_{\hs}\norm{S}_{\hs} \norm{S}_{\hs}^2}
+        = \norm{T}_{\hs} + \norm{S}_{\hs}
+    \end{align}
+
+
+    For the final property:
+    $$ \norm{TS}_{\hs} = \left(\sum_j \norm{TS e_j}^2\right)^{\frac{1}{2}} \leq  \left(\sum_j\norm{T}^2\norm{S e_j}^2\right)^{\frac{1}{2}}
+        = \norm{T} \left(\sum_j \norm{S e_j}^2\right)^\frac{1}{2}$$
+    $$ = \norm{T}\norm{S}_{\hs} \leq \norm{T}_{\hs}\norm{S}_{\hs}$$
+    because $\norm{T} \leq \norm{T}_{\hs}$.
+
+\end{exercise}
+
+\begin{exercise}{1.4.7}
+ Let $T : l^2(\Natural) \hookleftarrow$ given by $(T \xi)_n = \sum_{j=1}^\infty a_{nj} \xi_j$, $n \in \Natural$, with $(a_{nj})_{n,j\in\Natural}$
+  an infinite matrix with $\sum_{n,j\in\Natural} |a_{nj}|^2 < \infty$. Show that $T$ is a Hilbert-Schmidt operator and find its Hilbert-Schmidt norm.
+
+\end{exercise}
+
+\begin{exercise}{1.4.11}
+    
+\end{exercise}
+
+\begin{exercise}{1.4.12}
+    
+\end{exercise}
+
+\begin{exercise}{1.4.13}
+    
+\end{exercise}
+
+\begin{exercise}{1.4.14}
+    
+\end{exercise}
 
 \subsection{The spectrum}
 
