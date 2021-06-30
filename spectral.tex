@@ -23,23 +23,9 @@
   {\endinnerex}
 
 \DeclareMathOperator{\domain}{dom } \newcommand{\dom}{\domain}
-
 \DeclareMathOperator{\range}{rng } \newcommand{\rng}{\range}
-
 \DeclareMathOperator{\nullspace}{N} \newcommand{\kernel}{\nullspace}
-
 \DeclareMathOperator{\bounded}{B}
-
-\newcommand{\norm}[1]{\lVert #1 \rVert}
-\newcommand{\closure}[1]{\overline{ #1}}
-\newcommand{\inner}[2]{\langle #1, #2 \rangle}
-\newcommand{\openball}[2]{B\left(#1;#2\right)}
-\newcommand{\ball}[2]{\openball{#1}{#2}}
-\newcommand{\closedball}[2]{B\left[#1;#2\right]}
-
-
-
-
 \DeclareMathOperator{\Natural}{\mathbb{N}}
 \DeclareMathOperator{\Integer}{\mathbb{Z}}
 \DeclareMathOperator{\Rational}{\mathbb{Q}}
@@ -50,13 +36,18 @@
 \DeclareMathOperator{\hilbert}{\mathcal{H}}
 \DeclareMathOperator{\normed}{\mathcal{N}}
 \DeclareMathOperator{\graph}{\mathcal{G}}
-\DeclareMathOperator{\id}{\textbf{1}}
+\DeclareMathOperator{\Id}{\textbf{1}}
 \DeclareMathOperator{\strongly}{\stackrel{s}{\longrightarrow}}
 \DeclareMathOperator{\weakly}{\stackrel{w}{\longrightarrow}}
 \DeclareMathOperator{\linspan}{\text{Lin}}
 \DeclareMathOperator{\hs}{\text{HS}}
 
-
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\closure}[1]{\overline{ #1}}
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+\newcommand{\openball}[2]{B\left(#1;#2\right)}
+\newcommand{\ball}[2]{\openball{#1}{#2}}
+\newcommand{\closedball}[2]{B\left[#1;#2\right]}
 
 \renewcommand{\labelenumi}{\alph{enumi})}
 
@@ -543,9 +534,9 @@
 \end{exercise}
 
 \begin{exercise}{1.3.6}
-    If $\dim \normed = \infty$, show that the identity operator $\id : \normed \hookleftarrow$ is not compact (use, for instance, Riesz’s Lemma 1.6.2).
+    If $\dim \normed = \infty$, show that the identity operator $\Id : \normed \hookleftarrow$ is not compact (use, for instance, Riesz’s Lemma 1.6.2).
 
-    To show that $\id$ isn't compact, we must provide a set in $\normed$ that is bounded but isn't precompact. Well, if the dimension is infinite, we can choose
+    To show that $\Id$ isn't compact, we must provide a set in $\normed$ that is bounded but isn't precompact. Well, if the dimension is infinite, we can choose
     the unitary open ball $\openball{0}{1}$ as our bounded set (it is clearly bounded). However, it is not precompact because notably the closed ball
     $ \closure{\openball{0}{1}} = \closedball{0}{1}$ is not compact on infinite dimension.
 
@@ -621,7 +612,8 @@
     $$ \norm{T_n} + 0 + 0 + \norm{T_m} = 2$$
     So it can't possibly converge strongly.
 
-    \textcolor{red}{estou tendo dificuldade com convergencia fraca. Por exemplo, a proposicao 1.3.22: nao entendi. Uma sequencia fracamente convergente eh limitada?}
+    \textcolor{red}{estou tendo dificuldade com convergencia fraca. Por exemplo, a proposicao 1.3.22: nao entendi. Uma sequencia fracamente convergente eh limitada? 
+    Principio da limitacao uniforme + hahn banach (transformacao canonica?)}
 
 
 
@@ -659,9 +651,9 @@
 
 \begin{exercise}{1.3.31}
     Show that a precompact set (compact) in $(C[a, b], \norm{.}_\infty )$ is precompact (compact) in $L^2[a, b]$. This occurs because the identity map
-    $\id : (C[a, b]\norm{.}_\infty) \to L^2 [a, b]$ is continuous.
+    $\Id : (C[a, b]\norm{.}_\infty) \to L^2 [a, b]$ is continuous.
 
-    The bounded operator $\id$ is continuous, therefore the image of a compact set is compact. Also, $f\left(\closure{A}\right) = \closure{f(A)}$, because of sequential continuity.
+    The bounded operator $\Id$ is continuous, therefore the image of a compact set is compact. Also, $f\left(\closure{A}\right) = \closure{f(A)}$, because of sequential continuity.
 
 
 
@@ -700,31 +692,115 @@
 \end{exercise}
 
 \begin{exercise}{1.4.7}
- Let $T : l^2(\Natural) \hookleftarrow$ given by $(T \xi)_n = \sum_{j=1}^\infty a_{nj} \xi_j$, $n \in \Natural$, with $(a_{nj})_{n,j\in\Natural}$
-  an infinite matrix with $\sum_{n,j\in\Natural} |a_{nj}|^2 < \infty$. Show that $T$ is a Hilbert-Schmidt operator and find its Hilbert-Schmidt norm.
+    Let $T : l^2(\Natural) \hookleftarrow$ given by $(T \xi)_n = \sum_{j=1}^\infty a_{nj} \xi_j$, $n \in \Natural$, with $(a_{nj})_{n,j\in\Natural}$
+    an infinite matrix with $\sum_{n,j\in\Natural} |a_{nj}|^2 < \infty$. Show that $T$ is a Hilbert-Schmidt operator and find its Hilbert-Schmidt norm.
 
 \end{exercise}
 
 \begin{exercise}{1.4.11}
-    
+
 \end{exercise}
 
 \begin{exercise}{1.4.12}
-    
+
 \end{exercise}
 
 \begin{exercise}{1.4.13}
-    
+
 \end{exercise}
 
 \begin{exercise}{1.4.14}
-    
+
 \end{exercise}
 
 \subsection{The spectrum}
 
+\begin{exercise}{1.5.4}
+    Let $T : \banach \hookleftarrow$ be linear with $\dim \banach < \infty$. Show that $\sigma(T)$ is the
+    set of eigenvalues of $T$ and, by the fundamental theorem of algebra, conclude that
+    $\sigma(T ) \neq \emptyset$ in this case.
+
+    A linear operator $S$ is invertible iff $\kernel(S) = \left\{0\right\}$. Thus, if $S\xi = (T - \lambda \Id)\xi = 0$,
+    the non zero values for $\xi$, for which the operator $S$ is \textbf{not} invertible (for some $\lambda$), are exactly the set of eigenvectors (and the corresponding eigenvalues).
+
+    The tricky part here is that for finite spaces, the inverse of an operator (if it exists) is automatically bounded, which may not happen in infinite dimension.
+    In sum, in infinite dimensions, there might be certain values of $\lambda$ that are not eigenvalues, so the inverse of $S$ exists but isn't bounded, and $\lambda$
+    is in the spectrum. The spectrum, then, contains the set of eigenvalues.
+
+    In finite spaces the set of eigenvalues is the set of solutions of the characteristic equation, which is garanteed not to be empty by the Fundamental Theorem of Algebra.
+
+\end{exercise}
+
+\begin{exercise}{1.5.5}
+    Let $T : \dom T \subset \banach \to \banach$ be linear. Show that the eigenvectors $\{\xi_j \}_{j\in J}$ of $T$, corresponding to pairwise distinct eigenvalues $\{\lambda_j\}_{j\in J}$,
+    form a linearly independent set of $\dom T$.
+
+    Proof by induction. Consider two eigenvectors $\xi_1, \xi_2$ and the equation $\alpha_1 \xi_1 = \alpha_2 \xi_2$. Applying $T$, we have
+    $$ \alpha_1 T \xi_1 = \alpha_2 T \xi_2$$
+    $$ \alpha_1 \lambda_1 \xi_1 = \alpha_2 \lambda_2 \xi_2$$
+    $$ \lambda_1 (\alpha_1 \xi_1) = \lambda_2 (\alpha_2  \xi_2) $$
+    but we can replace $\alpha_1 \xi_1 = \alpha_2 \xi_2$, and
+    $$ \lambda_1 (\alpha_1 \xi_1) = \lambda_2 (\alpha_1  \xi_1) $$
+    Since $\lambda_1 \neq \lambda_2$ by hypothesis, $ \alpha_1 \xi_1 = 0$ and since $\xi_1 \neq 0$, $\alpha_1 = 0$. This implies $\alpha_2 \xi_2 = 0$ and $\alpha_2 = 0$.
+    We have then that any two eigenvectors are linearly independent.
+
+    Let $\{\xi_1, \dots, \xi_n\}$ be $n$ linearly independent eigenvectors. Given another $\xi_{n+1}$, let's consider the equation (*)
+    $$ \beta_1 \xi_1 + \dots + \beta_n \xi_n = \beta_{n+1} \xi_{n+1}$$
+    Applying the operator $T-\lambda_{n+1}\Id$ to both sides,
+    $$ (T-\lambda_{n+1}\Id) (\beta_1 \xi_1 + \dots + \beta_n \xi_n) = (T-\lambda_{n+1}\Id)(\beta_{n+1} \xi_{n+1})$$
+    $$ \beta_1 (T\xi_1-\lambda_{n+1}\xi_1) + \dots + \beta_n (T\xi_n-\lambda_{n+1}\xi_n) = \beta_{n+1} (T\xi_{n+1} - \lambda_{n+1}\xi_{n+1})$$
+    %%    $$ \beta_1 (\lambda_1\xi_1-\lambda_{n+1}\xi_1) + \dots + \beta_n (\lambda_n\xi_n-\lambda_{n+1}\xi_n) = \beta_{n+1} (T\xi_{n+1} - \lambda_{n+1}\xi_{n+1})$$
+    $$ \beta_1 (\lambda_1\xi_1-\lambda_{n+1}\xi_1) + \dots + \beta_n (\lambda_n\xi_n-\lambda_{n+1}\xi_n) = \beta_{n+1} (\lambda_{n+1}\xi_{n+1} - \lambda_{n+1}\xi_{n+1})$$
+    $$ \beta_1 (\lambda_1-\lambda_{n+1})\xi_1 + \dots + \beta_n (\lambda_n-\lambda_{n+1})\xi_n = 0$$
+
+    Since $\xi_1, \dots, \xi_n$ are linearly independent,
+    $$ \beta_1 (\lambda_1-\lambda_{n+1}) = \dots = \beta_n (\lambda_n-\lambda_{n+1}) = 0$$
+    And since $\lambda_i - \lambda_j \neq 0$ for $i \neq j$,
+    $$ \beta_1 = \dots = \beta_n = 0$$
+
+    Returning to the main equation (*), we have that
+    $$ 0 = \beta_{n+1} \xi_{n+1} \Rightarrow \beta_{n+1} = 0$$
+    and $\{\xi_1, \dots, \xi_n\} \cup \{ \xi_{n+1}\}$ is a linearly independent set. Thus, we conclude the proof.
+
+\end{exercise}
+
+\begin{exercise}{1.5.10}
+    For linear operators $T, S$ acting in $\banach$, with $\dom S \subset \dom T$, and
+    $\lambda \in \rho(T) \cap \rho(S)$, verify the second resolvent identity
+    $$R_\lambda (T) - R_\lambda (S) = R_\lambda (T)(S - T)R_\lambda(S).$$
+    If $\dom T = \dom S$, such identity also equals $R_\lambda (S)(S - T)R_\lambda (T)$.
+
+    Let $\lambda \in \rho(T)\cap\rho(S)$.
+
+    $$ \Id = (S - \lambda \Id) R_\lambda(S) $$
+    $$ \Id + \lambda \Id  R_\lambda(S)  = S R_\lambda(S) $$
+    Subtracting $T R_\lambda(S)$ from both sides,
+    $$ \Id - (T-\lambda \Id)R_\lambda(S) = (S-T)R_\lambda(S) $$
+    Applying $R_\lambda(T)$
+    $$ R_\lambda(T) - R_\lambda(T) (T-\lambda \Id)R_\lambda(S) =  R_\lambda(T)(S-T)R_\lambda(S)  $$
+    $$ R_\lambda(T) - R_\lambda(S) =  R_\lambda(T)(S-T)R_\lambda(S).$$
+
+\end{exercise}
+
 \subsection{Spectra of Compact Operators}
 
 \section{Adjoint Operator}
+
+\subsection{Adjoint Operator}
+
+\subsection{Cayley Transform I}
+
+\begin{exercise}{2.2.2}
+    Show that for a densely defined operator $T : \dom T \sqsubseteq \hilbert \hookleftarrow$ one has $\kernel(T^*) = (\rng (T))^\perp$.
+
+    Let $\zeta \in \kernel (T^*)$. So $\inner{\zeta}{T \xi} = \inner{T^* \zeta}{\xi} = \inner{0}{\xi} = 0$, for all $\xi \in \hilbert$, 
+    which means that $\zeta \in (\rng T)^\perp$ and $\kernel (T^*) \subseteq (\rng T)^\perp$. 
+    
+    Conversely, if $\phi \in (\rng T)^\perp$,
+    $ \inner{T^* \phi}{\xi} = \inner{\phi}{T\xi} = 0$, so $T^*\phi = 0$ and $\phi \in \kernel (T^*)$. 
+    This implies that $\kernel (T^*) \supseteq (\rng T)^\perp \Rightarrow \kernel (T^*) = (\rng T)^\perp$.
+
+    
+\end{exercise}
 
 \end{document}
