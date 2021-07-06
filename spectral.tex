@@ -22,6 +22,8 @@
   {\renewcommand\theinnerex{#1}\innerex}
   {\endinnerex}
 
+\newtheorem{remark}{Remark}[subsection]
+
 \DeclareMathOperator{\domain}{dom } \newcommand{\dom}{\domain}
 \DeclareMathOperator{\range}{rng } \newcommand{\rng}{\range}
 \DeclareMathOperator{\nullspace}{N} \newcommand{\kernel}{\nullspace}
@@ -48,6 +50,7 @@
 \newcommand{\openball}[2]{B\left(#1;#2\right)}
 \newcommand{\ball}[2]{\openball{#1}{#2}}
 \newcommand{\closedball}[2]{B\left[#1;#2\right]}
+\newcommand{\conj}[1]{\overline{#1}}
 
 \renewcommand{\labelenumi}{\alph{enumi})}
 
@@ -788,6 +791,27 @@
 
 \subsection{Adjoint Operator}
 
+\begin{remark}
+    Self-adjoint $\to$ hermitian $\to$ symmetric.
+\end{remark}
+
+\begin{remark}
+    It is essential that $\dom T$ is dense in $\hilbert$ for $T^*$ to be uniquely defined. \textcolor{red}{why?}
+\end{remark}
+
+\begin{remark}
+    If $S$ is also a linear operator and $z \in \Complex$, then $T^*$ is linear and $(S + z T)^* =  S* + \overline{z}T^*$.
+
+    $T^*$ is linear: Since $T$ is linear, taking $c \in \dom T, a, b \in \dom T^*$ we have $\inner{\alpha a + b}{T c} = \conj{\alpha}\inner{a}{T c} + \inner{b}{T c}
+        = \conj{\alpha}\inner{T^* a}{c} + \inner{ T^* b}{c} = \inner{\alpha T^* a + T^* b}{c}$. So $\alpha a + b \in \dom T^*$ (making $\dom T^* a vector space$) and
+    $T^*(\alpha a + b) = \alpha T^* a + T^* b$, and $T$ is linear.
+
+    Now let's find the adjoint of $S + zT$, $S$ being an arbitrary linear operator: $\inner{a}{(S + zT)b} = \inner{a}{S b} + z \inner{a}{T b} =
+        \inner{S^* a}{b} + z \inner{T^* a}{b} = \inner{(S^* + \conj{z} T^*)a}{b}$, so $(S + zT)^* = S^* + \conj{z} T^*$.
+
+
+\end{remark}
+
 \begin{exercise}{2.1.3} Show that $T : \dom T \sqsubseteq \hilbert \to \hilbert$ is hermitian iff $T \subset T^{*}$ (recall
     that, given two operators $R$, $S$, then $S \subset R$ indicates that $R$ is an extension of $S$).
 
@@ -798,6 +822,27 @@
     so $T$ is hermitian.
 
 \end{exercise}
+
+\begin{remark}
+    (Here we consider $T: \dom T \sqsubseteq \hilbert_1 \to \hilbert_2$). $\eta \in \dom T^*$ iff the map $\dom T \ni \xi \mapsto \inner{\eta}{T \xi}$ is uniformly continuous.
+
+    We can consider a (unique defined) continuous extension of $T$. Suppose such map is uniformly continuous, so it is bounded, and it is included in $\hilbert^*$, and by the Riesz
+    representation theorem, there exists $\zeta \in \hilbert_1$ that represents this functional, therefore $\eta \in \dom T^*$.
+
+    Reciprocally, $\eta \in \dom T^*$, then the map $\xi \mapsto \inner{\eta}{T \xi}$ becomes simply $\xi \mapsto \inner{T^* \eta}{\xi}$, which is bounded.
+
+
+\end{remark}
+
+\begin{remark}
+    (Proof of Proposition 2.1.13.)
+
+    Polarization identity:
+    $$ fsdf $$
+
+    Paralelogram law:
+    $$ Oji $$
+\end{remark}
 
 \begin{exercise}{2.1.19}
     \begin{enumerate}
@@ -826,13 +871,15 @@
         \item $T_2$ is closed iff $T_1$ is closed.
 
 
-              Say $T_1$ is closed. Consider $\dom T_2 \ni(\xi_n) \to \xi \in \hilbert_2$  and $(T_2 \xi_n) \to \eta$. $U^*\xi_n \to U^*(\xi)$ in $\dom T_1$ (since $U*$ is continuous), 
-              and $T_1(U^*\xi_n) \to \zeta = T_1(U^* \xi) $ (since $T_1$ is closed). Since $T_1$ and $T_2$ are unitarily equivalent, $\xi \in \dom T_2$, and 
+              Say $T_1$ is closed. Consider $\dom T_2 \ni(\xi_n) \to \xi \in \hilbert_2$  and $(T_2 \xi_n) \to \eta$. $U^*\xi_n \to U^*(\xi)$ in $\dom T_1$ (since $U*$ is continuous),
+              and $T_1(U^*\xi_n) \to \zeta = T_1(U^* \xi) $ (since $T_1$ is closed). Since $T_1$ and $T_2$ are unitarily equivalent, $\xi \in \dom T_2$, and
               $T_2 (\xi_n) = U T_1 U^* \xi_n \to U T_1 U^* \xi = T_2 (\xi)$ (since $U$ is continuous). Therefore, by the uniqueness of the limit, $\eta = T_2 \xi$
               and $T_2$ is closed.
 
-
         \item $T_2$ is hermitian, essentially self-adjoint, self-adjoint iff the corresponding statement holds for $T_1$.
+
+
+
         \item $T_1$ and $T_2$ have the same eigenvalues.
         \item $z \in \rho(T_2)$ iff $z \in \rho(T_1)$ and $\norm{R_z(T_2)} = \norm{R_z (T_1)}$; conclude that $\sigma(T2) = \sigma(T_1)$.
     \end{enumerate}
@@ -842,17 +889,68 @@
 
 \subsection{Cayley Transform I}
 
+\begin{remark}
+    If $T$ is hermitian, the operator $U (T) := (T - i\Id)(T + i\Id)^{-1}: \rng (T + i\Id) \to \rng (T - i\Id)$ is one-to-one, linear and isometric.
+    \begin{align*}
+        \norm{(T \pm i) \xi} & = \inner{(T \pm i) \xi}{(T \pm i) \xi}                                                                         \\
+                             & = \inner{T\xi}{T \xi} + \mp i \inner{\xi}{T \xi} + \pm i \inner{T \xi}{\xi} + (\pm i)(\mp i) \inner{(\xi}{\xi} \\
+                             & = \inner{T\xi}{T \xi} + \mp i \inner{T \xi}{\xi} + \pm i \inner{T \xi}{\xi} + \inner{(\xi}{\xi}                \\
+                             & = \norm{T \xi} + \norm{\xi} = \norm{\xi}_{T} \text{ (Graph norm)}
+    \end{align*}
+
+    Since this is an isometry, it is injective, onto \textcolor{red}{(?)}, and \textcolor{red}{it's inverse is also injetive, onto and linear}.
+    Therefore $U$ is one to one, linear and isometric.
+
+\end{remark}
+
 \begin{exercise}{2.2.2}
     Show that for a densely defined operator $T : \dom T \sqsubseteq \hilbert \hookleftarrow$ one has $\kernel(T^*) = (\rng (T))^\perp$.
 
-    Let $\zeta \in \kernel (T^*)$. So $\inner{\zeta}{T \xi} = \inner{T^* \zeta}{\xi} = \inner{0}{\xi} = 0$, for all $\xi \in \hilbert$,
-    which means that $\zeta \in (\rng T)^\perp$ and $\kernel (T^*) \subseteq (\rng T)^\perp$.
+    $$\zeta \in \kernel (T^*) \Leftrightarrow  \inner{T^* \zeta}{\xi} = 0 = \inner{\zeta}{T \xi} \Leftrightarrow \zeta \in (\rng T)^\perp$$ for all $\xi \in \dom T$.
 
-    Conversely, if $\phi \in (\rng T)^\perp$,
-    $ \inner{T^* \phi}{\xi} = \inner{\phi}{T\xi} = 0$, so $T^*\phi = 0$ and $\phi \in \kernel (T^*)$.
-    This implies that $\kernel (T^*) \supseteq (\rng T)^\perp \Rightarrow \kernel (T^*) = (\rng T)^\perp$.
+\end{exercise}
+
+\begin{exercise}{2.2.6}
+    Show that a hermitian operator $T$ is closed iff $U (T )$ is closed.
+
+    The operator $(\Id, U)$ is a homeomorphism (because it is a isometry, both ways) from $\graph T$ to $\graph U(T)$.
+
+\end{exercise}
+
+\begin{exercise}{2.2.7}
+    If $T$ is hermitian, show that $T$ is self-adjoint iff there exists $z \in \Complex \setminus \Real$ so that $\rng (T + z) = \rng (T + \conj{z}) = \hilbert$.
+
+    Suppose $T = T^*$. By prop. 2.2.4.ii), $\rng (T - i) = \rng (T + i) = \hilbert$, so $z = i$. To make explicit, the proof of this proposition goes like this:
+
+    Taking $\xi \in \rng(T + i)^\perp = \kernel(T^* - i)$, we have that $T\xi = i\xi$. But since all eigenvalues of $T$ are real, we must have $\xi = 0$,
+    and this means that $\rng (T + i)$ is dense in $\hilbert$. But from prop 2.2.4.i), $\rng (T + i)$ is closed for $T$ self-adjoint.
+    Thus, we have $\rng (T + i) = \closure{\rng (T + i)} = \hilbert$. The proof for $\rng(T-i)$ is completely analogous.
+
+    Now, for the reciprocal, suppose that $\rng (T + z) = \rng (T + \conj{z}) = \hilbert$. Since $T$ is hermitian, we already know that $T \subset T^*$.
+    It remains to be shown that $T^* \subset T$. Take $z \in \Complex$ and $\psi \in \dom T^*$, so $(T* + \conj{z}) \psi \in \hilbert$. Since $\rng (T + \conj{z}) = \hilbert$
+    there exists a $\alpha$ such that $(T* + \conj{z}) \psi = (T + \conj{z}) \alpha$. For any $\beta \in \dom T$,
+    $$ \inner{\psi}{(T+z)\beta} = \inner{(T*+\conj{z})\psi}{\beta} = \inner{(T+\conj{z})\alpha}{\beta} = \inner{T\alpha}{\beta} + \inner{\conj{z}\alpha}{\beta}$$,
+    and since $T$ is hermitian and $\alpha \in \dom T$, $$\inner{\alpha}{T\beta} + \inner{\alpha}{z \beta} = \inner{\alpha}{(T + z) \beta}.$$
+
+    Because $\inner{\psi}{(T + z) \beta} = \inner{\alpha}{(T + z) \beta}$ for all $\beta$, and $\rng(T + z)= \hilbert$, $\psi = \alpha \Rightarrow \psi \in \dom T
+        \Rightarrow T^* \subset T \Rightarrow T^* = T$.
 
 
 \end{exercise}
+
+\begin{exercise}{2.2.8}
+    
+    Let $T$ be a hermitian operator. 
+    
+    Show that $\rng (\closure{T} \pm i) = \closure{\rng (T \pm i)}$ (the bar denotes closure).
+
+
+
+
+\end{exercise}
+
+\begin{remark}(Remark 2.2.9.)
+    If $T$ is hermitian but not self-adjoint, then either $+i$ or $-i$ (or both) belongs to $\sigma(T )$, although neither of them is an eigenvalue of $T$.
+\end{remark}
 
 \end{document}
